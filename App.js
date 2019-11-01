@@ -17,25 +17,6 @@ export default function App() {
                             "VA", "WA", "WV", "WI", "WY" 
                           ]);
   const [modalVisible, setModalVisible] = useState(false);
-  // const [name, setName] = useState(""); 
-  // const [email, setEmail] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [city, setCity] = useState("");  
-  // const [zipCode, setZipCode] = useState("");  
-  const [currState, setCurrState] = useState("CA");
-  // const [phoneNumber, setPhoneNumber] = useState("");  
-  // const [reason, setReason] = useState("");  
-
-  // handleSubmit = () => {
-  //   console.log("name is", name);
-  //   console.log("email is", email);
-  //   console.log("address is", address);
-  //   console.log("city is", city);
-  //   console.log("zipCode is", zipCode);
-  //   console.log("currState is", currState);
-  //   console.log("phoneNumber is", phoneNumber);
-  //   console.log("reason is", reason);
-  // }
 
   emailInput = null;
   addressInput = null;
@@ -84,7 +65,7 @@ export default function App() {
               }, 500);
             }}>
             {props => (
-              <KeyboardAvoidingView behavior="position">
+              <KeyboardAvoidingView behavior="padding">
                 <View style={styles.container}>
                   <Input
                     style={styles.textInput}
