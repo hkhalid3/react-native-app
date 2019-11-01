@@ -10,15 +10,15 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 export default function App() {
   const [state] = useState(["AL", "AK", "AZ", "AR", "CA",
-    "CO", "CT", "DE", "FL", "GA",
-    "HI", "ID", "IL", "IN", "IA",
-    "KS", "KY", "LA", "ME", "MD",
-    "MA", "MI", "MN", "MS", "MO",
-    "MT", "NE", "NV", "NH", "NJ",
-    "NM", "NY", "NC", "ND", "OH",
-    "OK", "OR", "PA", "RI", "SC",
-    "SD", "TN", "TX", "UT", "VT",
-    "VA", "WA", "WV", "WI", "WY"
+                            "CO", "CT", "DE", "FL", "GA",
+                            "HI", "ID", "IL", "IN", "IA",
+                            "KS", "KY", "LA", "ME", "MD",
+                            "MA", "MI", "MN", "MS", "MO",
+                            "MT", "NE", "NV", "NH", "NJ",
+                            "NM", "NY", "NC", "ND", "OH",
+                            "OK", "OR", "PA", "RI", "SC",
+                            "SD", "TN", "TX", "UT", "VT",
+                            "VA", "WA", "WV", "WI", "WY"
   ]);
   const [modalVisible, setModalVisible] = useState(false);
   const [phoneNumberState, setPhoneNumberState] = useState("");
