@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ScrollView, StyleSheet, Text, View, Picker, Modal, TouchableHighlight, Alert,
-  KeyboardAvoidingView, Platform
+  StyleSheet, Text, View, Picker, Modal, TouchableHighlight, Alert, Platform
 } from 'react-native';
 import { Button, Header, Input } from 'react-native-elements';
 import { Formik } from 'formik';
@@ -22,11 +21,8 @@ export default function App() {
     "VA", "WA", "WV", "WI", "WY"
   ]);
   const [modalVisible, setModalVisible] = useState(false);
-
   const [phoneNumberState, setPhoneNumberState] = useState("");
-
   const [phoneNumberFormatState, setPhoneNumberFormatState] = useState("");
-
 
   emailInput = null;
   addressInput = null;
@@ -52,6 +48,7 @@ export default function App() {
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableAutomaticScroll={(Platform.OS === 'ios')}
+        contentContainerStyle={{flex: 1}}
       >
         <Formik
           initialValues={{ name: '', email: '', address: '', city: '', zipCode: '', state: 'CA', phoneNumber: '', reason: '' }}
@@ -178,7 +175,7 @@ export default function App() {
                         <Picker
                           selectedValue={props.values.state}
                           style={{ height: 50, width: 100 }}
-                          onValueChange={(itemValue, itemIndex) =>
+                          onValueChange={itemValue =>
                             props.setFieldValue('state', itemValue)
                           }
                           renderHeader={backAction => (
@@ -302,17 +299,11 @@ export default function App() {
                   />
                    */}
             </View>
-            // </KeyboardAvoidingView>
           )}
         </Formik>
       </KeyboardAwareScrollView>
-      {/* </View>
-      </ScrollView > */}
     </React.Fragment >
   );
-
-
-
 }
 
 const styles = StyleSheet.create({
