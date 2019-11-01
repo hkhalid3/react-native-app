@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, Picker, Modal, TouchableHighlight, Alert, KeyboardAvoidingView } from 'react-native';
+import {
+  ScrollView, StyleSheet, Text, View, Picker, Modal, TouchableHighlight, Alert,
+  KeyboardAvoidingView
+} from 'react-native';
 import { Button, Header, Input } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { TextInputMask } from 'react-native-masked-text'
 
 export default function App() {
   const [state] = useState(["AL", "AK", "AZ", "AR", "CA",
-                            "CO", "CT", "DE", "FL", "GA",
-                            "HI", "ID", "IL", "IN", "IA",
-                            "KS", "KY", "LA", "ME", "MD",
-                            "MA", "MI", "MN", "MS", "MO", 
-                            "MT", "NE", "NV", "NH", "NJ", 
-                            "NM", "NY", "NC", "ND", "OH", 
-                            "OK", "OR", "PA", "RI", "SC",
-                            "SD", "TN", "TX", "UT", "VT", 
-                            "VA", "WA", "WV", "WI", "WY" 
-                          ]);
+    "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA",
+    "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO",
+    "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH",
+    "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT",
+    "VA", "WA", "WV", "WI", "WY"
+  ]);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [phoneNumberState, setPhoneNumberState] = useState("");
+
+  const [phoneNumberFormatState, setPhoneNumberFormatState] = useState("");
+
 
   emailInput = null;
   addressInput = null;
@@ -25,6 +34,10 @@ export default function App() {
   stateInput = null;
   phoneNumberInput = null;
   reasonInput = null;
+
+  tester = () => {
+    console.log("phone is ", phoneNumberState);
+  }
 
   return (
     <React.Fragment>
@@ -40,7 +53,7 @@ export default function App() {
           <Formik
             initialValues={{ name: '', email: '', address: '', city: '', zipCode: '', state: 'CA', phoneNumber: '', reason: '' }}
             validationSchema={Yup.object({
-              name: Yup.string()              
+              name: Yup.string()
                 .required('Required'),
               email: Yup.string()
                 .email('Invalid Email')
@@ -136,9 +149,9 @@ export default function App() {
                     errorStyle={{ color: 'red' }}
                     errorMessage={props.touched.zipCode && props.errors.zipCode ? props.errors.zipCode : ""}
                   />
-                  
+
                   <View>
-                    <Input 
+                    <Input
                       style={styles.textInput}
                       label="State:"
                       value={props.values.state}
@@ -162,17 +175,17 @@ export default function App() {
                             </TouchableHighlight>
                             <Picker
                               selectedValue={props.values.state}
-                              style={{height: 50, width: 100}}
-                              onValueChange={(itemValue, itemIndex) => 
+                              style={{ height: 50, width: 100 }}
+                              onValueChange={(itemValue, itemIndex) =>
                                 props.setFieldValue('state', itemValue)
                               }
                               renderHeader={backAction => (
                                 <Button onPress={() => {
-                                    backAction();
-                                    someFunction();
+                                  backAction();
+                                  someFunction();
                                 }} />
                               )}>
-                              {state.map( (v)=>{
+                              {state.map((v) => {
                                 return <Picker.Item label={v} value={v} key="TEST" />
                               })}
                             </Picker>
@@ -189,7 +202,34 @@ export default function App() {
                     </View>
                   </View>
 
-                  <Input
+                  <TextInputMask
+                    placeholder='Enter Phone Number'
+                    value={phoneNumberState}
+                    onChangeText={(phoneNumberFormat) => {
+                      let phoneNumber = phoneNumberFormat.toString().replace(/\D+/g, '');
+                      setPhoneNumberFormatState(phoneNumberFormat);
+                      setPhoneNumberState(phoneNumber);
+                      // this.setState({ phoneNumberFormat: phoneNumberFormat, phoneNumber: phoneNumber })
+                    }}
+                    type={'cel-phone'}
+                    // maxLength={this.state.phoneNumberFormat.toString().startsWith("1") ? 18 : 16}
+                    maxLength={phoneNumberState.toString().startsWith("1") ? 16 : 14}
+                    options={
+                      phoneNumberState.toString().startsWith("1") ?
+                        { dddMask: '1 (999) 999-9999' } :
+                        { dddMask: '(999) 999-9999' }
+                    }
+                  // options={
+                  //   this.state.phoneNumber.startsWith("1") ?
+                  //     {
+                  //       dddMask: '9 (999) 999 - '
+                  //     } : {
+                  //       dddMask: '(999) 999 - '
+                  //     }
+                  // }
+                  />
+
+                  {/* <Input
                     style={styles.textInput}
                     label="Phone Number:"
                     placeholder="Your phone number"
@@ -202,7 +242,7 @@ export default function App() {
                     }}
                     errorStyle={{ color: 'red' }}
                     errorMessage={props.touched.phoneNumber && props.errors.phoneNumber ? props.errors.phoneNumber : ""}
-                  />
+                  /> */}
                   <Input
                     multiline
                     style={styles.textInput}
@@ -218,6 +258,39 @@ export default function App() {
                     errorMessage={props.touched.reason && props.errors.reason ? props.errors.reason : ""}
                   />
 
+                  <View style={{
+                    flex: 10,
+                    // width: 500,
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-around',
+                    flexDirection: 'row'
+                  }}>
+                    <View style={{
+                      flex: 4,
+                      // width: 244,
+                    }}
+                    >
+                      <Button
+                        title="test"
+                        onPress={tester}
+                      />
+                    </View>
+                    <View style={{
+                      flex: 4,
+                      // width: 244,
+                    }}>
+                      <Button
+                        title="test"
+                        onPress={tester}
+                      />
+                    </View>
+                  </View>
+                  {/* 
+                  <Button
+                    title="test"
+                    onPress={tester}
+                  />
+
                   <Button
                     title="Submit"
                     buttonStyle={{ backgroundColor: 'red' }}
@@ -225,14 +298,18 @@ export default function App() {
                     loading={props.isSubmitting}
                     disabled={props.isSubmitting}
                   />
+                   */}
                 </View>
               </KeyboardAvoidingView>
             )}
-          </Formik>      
+          </Formik>
         </View>
       </ScrollView>
     </React.Fragment>
   );
+
+
+
 }
 
 const styles = StyleSheet.create({
