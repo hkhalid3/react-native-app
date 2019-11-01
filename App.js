@@ -48,7 +48,6 @@ export default function App() {
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableAutomaticScroll={(Platform.OS === 'ios')}
-        contentContainerStyle={{flex: 1}}
       >
         <Formik
           initialValues={{ name: '', email: '', address: '', city: '', zipCode: '', state: 'CA', phoneNumber: '', reason: '' }}
@@ -89,9 +88,10 @@ export default function App() {
                 onSubmitEditing={() => {
                   emailInput.focus()
                 }}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.name && props.errors.name ? props.errors.name : ""}
               />
+              {props.touched.name && props.errors.name ? (
+                <Text style={styles.error}>{props.errors.name}</Text>
+              ) : null}
               <Input
                 style={styles.textInput}
                 label="Email:"
@@ -103,9 +103,10 @@ export default function App() {
                 onSubmitEditing={() => {
                   addressInput.focus()
                 }}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.email && props.errors.email ? props.errors.email : ""}
               />
+              {props.touched.email && props.errors.email ? (
+                <Text style={styles.error}>{props.errors.email}</Text>
+              ) : null}
               <Input
                 style={styles.textInput}
                 label="Address:"
@@ -117,9 +118,10 @@ export default function App() {
                 onSubmitEditing={() => {
                   cityInput.focus()
                 }}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.address && props.errors.address ? props.errors.address : ""}
               />
+              {props.touched.address && props.errors.address ? (
+                <Text style={styles.error}>{props.errors.address}</Text>
+              ) : null}
               <Input
                 style={styles.textInput}
                 label="City:"
@@ -131,9 +133,10 @@ export default function App() {
                 onSubmitEditing={() => {
                   zipCodeInput.focus()
                 }}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.city && props.errors.city ? props.errors.city : ""}
               />
+              {props.touched.city && props.errors.city ? (
+                <Text style={styles.error}>{props.errors.city}</Text>
+              ) : null}
               <Input
                 style={styles.textInput}
                 label="Zip Code:"
@@ -145,9 +148,10 @@ export default function App() {
                 onSubmitEditing={() => {
                   stateInput.focus()
                 }}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.zipCode && props.errors.zipCode ? props.errors.zipCode : ""}
               />
+              {props.touched.zipCode && props.errors.zipCode ? (
+                <Text style={styles.error}>{props.errors.zipCode}</Text>
+              ) : null}
 
               <View>
                 <Input
@@ -253,9 +257,10 @@ export default function App() {
                 onBlur={props.handleBlur('reason')}
                 value={props.values.reason}
                 ref={el => reasonInput = el}
-                errorStyle={{ color: 'red' }}
-                errorMessage={props.touched.reason && props.errors.reason ? props.errors.reason : ""}
               />
+              {props.touched.reason && props.errors.reason ? (
+                <Text style={styles.error}>{props.errors.reason}</Text>
+              ) : null}
 
               <View style={{
                 flex: 10,
@@ -328,5 +333,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingLeft: 20,
     paddingRight: 20
+  },
+  error: {
+    margin: 8,
+    fontSize: 14,
+    color: 'red',
+    fontWeight: 'bold',
   },
 });
