@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Trillion Registry",
-    "slug": "registryTrillion",
+    "name": "Trillion Technology Solutions",
+    "slug": "guest-registry",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -25,6 +25,9 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
-  }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "Trillion Technology Solutions",
+  "name": "guestRegistry"
 }
